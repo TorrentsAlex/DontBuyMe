@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.jae.JAEScreen;
 import com.jae.Models.Entity;
 import com.jae.Models.JAEAnimation;
@@ -44,7 +43,6 @@ public class Tilt extends JAEScreen {
         player.addPosition(accelY / 10 * velocity, 0);
 
         // Collisions
-
         for (int i = 0; i < spikes.length; i++) {
             if (Intersector.overlaps(player.getRectangle(), spikes[i].getRectangle())) {
                 done = true;

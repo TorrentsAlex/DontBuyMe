@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.jae.JAEScreen;
 import com.jae.Models.Entity;
 
@@ -19,6 +20,8 @@ public class TouchFast extends JAEScreen {
     Camera camera;
     SpriteBatch batch;
     boolean done;
+    Entity playButton;
+
 
     public TouchFast() {
         init();
@@ -30,7 +33,10 @@ public class TouchFast extends JAEScreen {
         camera.update();
 
         if (Gdx.input.isTouched()) {
-            done = true;
+            Vector3 touchpos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0.0f));
+            if (playButton.contains(touchpos.x, touchpos.y)) {
+                done = true;
+            }
         }
     }
 
@@ -41,6 +47,8 @@ public class TouchFast extends JAEScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         background.draw(batch);
+        playButton.draw(batch);
+
         batch.end();
     }
 
@@ -58,6 +66,10 @@ public class TouchFast extends JAEScreen {
         background = new Entity("airadventurelevel2.png");
         background.setPosition(new Vector2(0,0));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        playButton = new Entity("b_round_g.png");
+        playButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2.5f, Gdx.graphics.getHeight()/2.5f));
+        playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
 
     }
 }
