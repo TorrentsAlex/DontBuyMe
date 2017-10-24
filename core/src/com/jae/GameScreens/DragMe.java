@@ -1,6 +1,7 @@
 package com.jae.GameScreens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -21,9 +22,9 @@ public class DragMe extends JAEScreen {
 
     Camera camera;
     SpriteBatch batch;
-    boolean done;
 
-    public DragMe() {
+    public DragMe(Game game) {
+        super(game);
         init();
     }
 

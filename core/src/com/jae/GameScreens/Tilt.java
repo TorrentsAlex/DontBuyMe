@@ -1,11 +1,13 @@
 package com.jae.GameScreens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.jae.JAEScreen;
 import com.jae.Models.Entity;
@@ -16,6 +18,7 @@ import com.jae.Models.JAEAnimation;
  */
 
 public class Tilt extends JAEScreen {
+
     Entity background;
 
     Camera camera;
@@ -26,9 +29,8 @@ public class Tilt extends JAEScreen {
 
     int velocity = 20;
 
-    boolean done;
-
-    public Tilt() {
+    public Tilt(Game game) {
+        super(game);
         init();
     }
 
@@ -39,8 +41,7 @@ public class Tilt extends JAEScreen {
         player.update();
 
         float accelY = Gdx.input.getAccelerometerY();
-
-        player.addPosition(accelY / 10 * velocity, 0);
+        player.addVelocity((int) (accelY / 10 * velocity), 0);
 
         // Collisions
         for (int i = 0; i < spikes.length; i++) {
@@ -96,5 +97,13 @@ public class Tilt extends JAEScreen {
         player.setSize(new Vector2(Gdx.graphics.getHeight()/4, Gdx.graphics.getHeight()/4));
         player.setPosition(new Vector2(Gdx.graphics.getWidth()/2- player.getSize().x,
                                         Gdx.graphics.getHeight()/2 - player.getSize().y));
+        player.setVelocity(MathUtils.random(2), 0);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        player.dispose();
+        background.dispose();
     }
 }

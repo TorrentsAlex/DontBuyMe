@@ -1,5 +1,6 @@
 package com.jae.ActivityScreens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -23,9 +24,8 @@ public class MainMenu extends JAEScreen {
     Entity playButton;
 
 
-    boolean done;
-
-    public MainMenu() {
+    public MainMenu(Game game) {
+        super(game);
         init();
     }
 

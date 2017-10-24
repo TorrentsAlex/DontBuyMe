@@ -1,5 +1,6 @@
 package com.jae;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 
 /**
@@ -8,6 +9,9 @@ import com.badlogic.gdx.Screen;
 
 public abstract class JAEScreen implements Screen {
 
+    protected Game game;
+    protected boolean done;
+
     /** Called when the screen should update itself, e.g. continue a simulation etc. */
     public abstract void update (float delta);
 
@@ -15,6 +19,10 @@ public abstract class JAEScreen implements Screen {
     public abstract void draw (float delta);
 
     public abstract boolean isDone();
+
+    public JAEScreen(Game game) {
+        this.game = game;
+    }
 
     @Override
     public void show() {
@@ -49,6 +57,6 @@ public abstract class JAEScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        done = false;
     }
 }

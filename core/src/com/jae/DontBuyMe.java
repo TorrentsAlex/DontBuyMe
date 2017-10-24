@@ -24,12 +24,12 @@ public class DontBuyMe extends Game {
 
 	@Override
 	public void create () {
-        setScreen(new MainMenu());
+        setScreen(new MainMenu(this));
 
         games = new ArrayList<JAEScreen>();
-        games.add(new Tilt());
-        games.add(new DragMe());
-        games.add(new TouchFast());
+        games.add(new Tilt(this));
+        games.add(new DragMe(this));
+        games.add(new TouchFast(this));
         countCurrentScreen = 0;
 
         gameState = GameState.MENU;
@@ -52,14 +52,17 @@ public class DontBuyMe extends Game {
                 case GAME:
                     countCurrentScreen++;
                     if (countCurrentScreen >= games.size()) {
-                        gameState = GameState.GAME;
-                        setScreen(new EndMenu());
+                        gameState = GameState.END;
+                        setScreen(new EndMenu(this));
 
                     } else {
                         setScreen(games.get(countCurrentScreen));
                     }
                     break;
                 case END:
+                    setScreen(new MainMenu(this));
+                    countCurrentScreen = 0;
+                    gameState = GameState.MENU;
                     break;
             }
         }

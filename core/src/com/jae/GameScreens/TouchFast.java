@@ -1,5 +1,6 @@
 package com.jae.GameScreens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,11 +20,12 @@ public class TouchFast extends JAEScreen {
 
     Camera camera;
     SpriteBatch batch;
-    boolean done;
+
     Entity playButton;
 
 
-    public TouchFast() {
+    public TouchFast(Game game) {
+        super(game);
         init();
     }
 

@@ -1,5 +1,6 @@
 package com.jae.ActivityScreens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -22,10 +23,8 @@ public class EndMenu extends JAEScreen { Camera camera;
     Entity playButton;
     Entity endButton;
 
-
-    boolean done;
-
-    public EndMenu() {
+    public EndMenu(Game game) {
+        super(game);
         init();
     }
 
@@ -36,7 +35,7 @@ public class EndMenu extends JAEScreen { Camera camera;
         if (Gdx.input.isTouched()) {
             Vector3 touchpos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0.0f));
             if (playButton.contains(touchpos.x, touchpos.y)) {
-                done = true;
+                game.setScreen(new MainMenu(game));
             }
             if (endButton.contains(touchpos.x, touchpos.y)) {
                 done = true;
