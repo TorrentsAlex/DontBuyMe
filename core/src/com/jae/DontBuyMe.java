@@ -9,6 +9,7 @@ import com.jae.GameScreens.Tilt;
 import com.jae.GameScreens.TouchFast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 enum GameState {
     MENU,
@@ -27,10 +28,7 @@ public class DontBuyMe extends Game {
         setScreen(new MainMenu(this));
 
         games = new ArrayList<JAEScreen>();
-        games.add(new Tilt(this));
-        games.add(new DragMe(this));
-        games.add(new TouchFast(this));
-        countCurrentScreen = 0;
+        shuffleGames();
 
         gameState = GameState.MENU;
     }
@@ -61,7 +59,8 @@ public class DontBuyMe extends Game {
                     break;
                 case END:
                     setScreen(new MainMenu(this));
-                    countCurrentScreen = 0;
+                    shuffleGames();
+                    
                     gameState = GameState.MENU;
                     break;
             }
@@ -72,4 +71,19 @@ public class DontBuyMe extends Game {
 	public void dispose () {
 
 	}
+
+	/**
+	* Randomize, reset and start the arraylist of the games
+	* */
+    void shuffleGames() {
+        countCurrentScreen = 0;
+
+        games.clear();
+
+        games.add(new Tilt(this));
+        games.add(new DragMe(this));
+        games.add(new TouchFast(this));
+
+        Collections.shuffle(games);
+    }
 }
