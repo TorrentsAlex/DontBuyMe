@@ -44,6 +44,16 @@ public class Entity {
         rectangle.setSize(size.x, size.y);
     }
 
+    /**
+     * Set the image centerized into screen
+     * WARNING: It's important call this AFTER setSize() method
+     * */
+    public void setPositionCenter() {
+        rectangle.setPosition(
+                Gdx.graphics.getWidth()/2 - rectangle.getWidth()/2,
+                Gdx.graphics.getHeight()/2 - rectangle.getHeight()/2);
+    }
+
     public void setSize(int x, int y) {
         rectangle.setSize(x, y);
     }
