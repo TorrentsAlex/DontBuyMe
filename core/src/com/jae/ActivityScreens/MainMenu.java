@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.jae.JAEScreen;
@@ -22,6 +24,7 @@ public class MainMenu extends JAEScreen {
 
     Entity background;
     Entity playButton;
+    Entity title;
 
 
     public MainMenu(Game game) {
@@ -42,12 +45,15 @@ public class MainMenu extends JAEScreen {
 
     @Override
     public void draw(float delta) {
-
         Gdx.gl.glClearColor(0, 0.25f, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         batch.begin();
+
         background.draw(batch);
         playButton.draw(batch);
+        title.draw(batch);
+
         batch.end();
     }
 
@@ -78,5 +84,14 @@ public class MainMenu extends JAEScreen {
         playButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/4));
         playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
 
+
+        Texture titleTexture = new Texture("titles.png");
+        TextureRegion titleRegion = new TextureRegion(titleTexture, 0, 0, titleTexture.getWidth(), titleTexture.getHeight()/ 6);
+
+        title = new Entity(titleRegion.getTexture());
+        title.setSize(Gdx.graphics.getWidth()*3/4, Gdx.graphics.getHeight() /4);
+        title.setPosition(new Vector2(Gdx.graphics.getWidth()/2 + title.getSize().x/2, 50));
+
+        Gdx.app.debug("DontBuyMe","init Main menu");
     }
 }

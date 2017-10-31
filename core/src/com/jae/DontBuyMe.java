@@ -1,27 +1,34 @@
 package com.jae;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.jae.ActivityScreens.EndMenu;
 import com.jae.ActivityScreens.MainMenu;
 import com.jae.GameScreens.DragMe;
+import com.jae.GameScreens.Swipe;
 import com.jae.GameScreens.Tilt;
 import com.jae.GameScreens.TouchFast;
+import com.jae.Models.Entity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-enum GameState {
-    MENU,
-    GAME,
-    END
-};
 
 public class DontBuyMe extends Game {
+    enum GameState {
+        MENU,
+        GAME,
+        END
+    }
 
     ArrayList<JAEScreen> games;
     int countCurrentScreen;
     GameState gameState;
+
+    TextureRegion title;
 
 	@Override
 	public void create () {
@@ -31,7 +38,9 @@ public class DontBuyMe extends Game {
         shuffleGames();
 
         gameState = GameState.MENU;
-    }
+
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+	}
 
 	@Override
 	public void render () {
@@ -60,7 +69,7 @@ public class DontBuyMe extends Game {
                 case END:
                     setScreen(new MainMenu(this));
                     shuffleGames();
-                    
+
                     gameState = GameState.MENU;
                     break;
             }
@@ -83,6 +92,7 @@ public class DontBuyMe extends Game {
         games.add(new Tilt(this));
         games.add(new DragMe(this));
         games.add(new TouchFast(this));
+        games.add(new Swipe(this));
 
         Collections.shuffle(games);
     }

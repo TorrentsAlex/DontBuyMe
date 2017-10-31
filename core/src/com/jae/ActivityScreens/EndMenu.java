@@ -76,7 +76,7 @@ public class EndMenu extends JAEScreen { Camera camera;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0.0f);
 
-        background = new Entity("airadventurelevel4.png");
+        background = new Entity("parallax-forest.png");
         background.setPosition(new Vector2(0,0));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -87,5 +87,7 @@ public class EndMenu extends JAEScreen { Camera camera;
         endButton = new Entity("cross.png");
         endButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
         endButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2 + playButton.getSize().x /2, Gdx.graphics.getHeight()/2));
+        Gdx.app.debug("DontBuyMe","init End menu");
+
     }
 }

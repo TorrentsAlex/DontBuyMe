@@ -95,9 +95,11 @@ public class Tilt extends JAEScreen {
 
         player = new JAEAnimation("jump-blue.png", 4, 2, 1/15.0f);
         player.setSize(new Vector2(Gdx.graphics.getHeight()/4, Gdx.graphics.getHeight()/4));
-        player.setPosition(new Vector2(Gdx.graphics.getWidth()/2- player.getSize().x,
-                                        Gdx.graphics.getHeight()/2 - player.getSize().y));
+        player.setPosition(new Vector2(Gdx.graphics.getWidth()/2- player.getSize().x/2,
+                                        Gdx.graphics.getHeight()/2 - player.getSize().y/2));
         player.setVelocity(MathUtils.random(2), 0);
+        Gdx.app.debug("DontBuyMe","init Tilt Game");
+
     }
 
     @Override

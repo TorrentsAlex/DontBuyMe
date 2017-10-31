@@ -19,12 +19,15 @@ public class Entity {
     protected Vector2 velocity;
 
     public Entity() {
-        rectangle = new Rectangle();
         init();
     }
 
     public Entity(String path) {
         texture = new Texture(path);
+        init();
+    }
+    public Entity(Texture texture) {
+        this.texture = texture;
         init();
     }
 

@@ -73,5 +73,8 @@ public class TouchFast extends JAEScreen {
         playButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2.5f, Gdx.graphics.getHeight()/2.5f));
         playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
 
+        Gdx.app.debug("DontBuyMe","init Touch fast game");
+
+
     }
 }
