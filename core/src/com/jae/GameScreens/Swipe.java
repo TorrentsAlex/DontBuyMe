@@ -12,7 +12,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.jae.JAEScreen;
 import com.jae.Models.Entity;
 
-import sun.rmi.runtime.Log;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Alex Torrents (aka Turri) on 31-Oct-17.
@@ -20,13 +21,24 @@ import sun.rmi.runtime.Log;
 
 public class Swipe extends JAEScreen implements GestureDetector.GestureListener {
 
+    enum SWIPE {
+        UP, DOWN, LEFT, RIGHT, NULL
+    }
+
     Entity background;
     Entity playButton;
 
-    Camera camera;
+    Entity imgUp;
+    Entity imgDown;
+    Entity imgLeft;
+    Entity imgRight;
 
+    Camera camera;
     SpriteBatch batch;
 
+    ArrayList<SWIPE> swipesList;
+    int currentCountSwipeList;
+    SWIPE currentSWIPEDetected;
 
     public Swipe(Game game) {
         super(game);
@@ -43,6 +55,17 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
                 done = true;
             }
         }
+
+        // Check if we swiped
+        if (currentSWIPEDetected != SWIPE.NULL) {
+            if (currentSWIPEDetected == swipesList.get(currentCountSwipeList)) {
+                if (currentCountSwipeList > swipesList.size()) {
+                    done = true;
+                }
+                currentCountSwipeList++;
+            }
+            currentSWIPEDetected = SWIPE.NULL;
+        }
     }
 
     @Override
@@ -54,6 +77,24 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
 
         background.draw(batch);
         playButton.draw(batch);
+
+        // Render the swipes images
+        switch(swipesList.get(currentCountSwipeList)) {
+            case UP:
+                imgUp.draw(batch);
+                break;
+            case DOWN:
+                imgDown.draw(batch);
+                break;
+            case LEFT:
+                imgLeft.draw(batch);
+                break;
+            case RIGHT:
+                imgRight.draw(batch);
+                break;
+            case NULL:
+                break;
+        }
 
         batch.end();
     }
@@ -68,12 +109,29 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
         super.dispose();
         batch.dispose();
         background.dispose();
+    }
 
+    private void shuffleSwipes() {
+        currentSWIPEDetected = SWIPE.NULL;
+        currentCountSwipeList = 0;
+        swipesList = new ArrayList<SWIPE>();
+
+        swipesList.add(SWIPE.UP);
+        swipesList.add(SWIPE.UP);
+        swipesList.add(SWIPE.DOWN);
+        swipesList.add(SWIPE.DOWN);
+        swipesList.add(SWIPE.LEFT);
+        swipesList.add(SWIPE.LEFT);
+        swipesList.add(SWIPE.RIGHT);
+        swipesList.add(SWIPE.RIGHT);
+        Collections.shuffle(swipesList);
     }
 
     private void init() {
         done = false;
         batch = new SpriteBatch();
+
+        shuffleSwipes();
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0.0f);
@@ -86,14 +144,32 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
         playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
         playButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2 - playButton.getSize().x /2, Gdx.graphics.getHeight()/2));
 
+
+        // Swipe images
+        imgUp = new Entity("swipe_up.png");
+        imgUp.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
+        imgUp.setPositionCenter();
+
+        imgDown = new Entity("swipe_down.png");
+        imgDown.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
+        imgDown.setPositionCenter();
+
+        imgLeft = new Entity("swipe_left.png");
+        imgLeft.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
+        imgLeft.setPositionCenter();
+
+        imgRight = new Entity("swipe_right.png");
+        imgRight.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
+        imgRight.setPositionCenter();
+
         Gdx.input.setInputProcessor(new GestureDetector(this));
         Gdx.app.debug("DontBuyMe", "init Swipe Class");
     }
 
-    private void onUp() {Gdx.app.debug("DontBuyMe", "OnUp");}
-    private void onDown() {Gdx.app.debug("DontBuyMe", "OnDown");}
-    private void onRight() {Gdx.app.debug("DontBuyMe", "OnRight");}
-    private void onLeft() {Gdx.app.debug("DontBuyMe", "OnLeft");}
+    private void onUp() {currentSWIPEDetected  = SWIPE.UP;}
+    private void onDown() {currentSWIPEDetected  = SWIPE.DOWN;}
+    private void onRight() {currentSWIPEDetected  = SWIPE.RIGHT;}
+    private void onLeft() {currentSWIPEDetected  = SWIPE.LEFT;}
 
     // Gesture Listener overrides
 
