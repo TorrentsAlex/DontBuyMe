@@ -21,9 +21,6 @@ public class Tilt extends JAEScreen {
 
     Entity background;
 
-    Camera camera;
-    SpriteBatch batch;
-
     Entity[] spikes;
     JAEAnimation player;
 
@@ -37,7 +34,6 @@ public class Tilt extends JAEScreen {
 
     @Override
     public void update(float delta) {
-        camera.update();
         player.update();
 
         float accelY = Gdx.input.getAccelerometerY();
@@ -53,10 +49,6 @@ public class Tilt extends JAEScreen {
 
     @Override
     public void draw(float delta) {
-        camera.update();
-        Gdx.gl.glClearColor(0, 0.25f, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
         background.draw(batch);
 
         for (int i = 0; i<spikes.length; i++) {
@@ -64,8 +56,6 @@ public class Tilt extends JAEScreen {
         }
 
         player.draw(batch);
-
-        batch.end();
     }
 
     @Override
@@ -75,9 +65,6 @@ public class Tilt extends JAEScreen {
 
     private void init() {
         done = false;
-        batch = new SpriteBatch();
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0.0f);
 
         background = new Entity("airadventurelevel3.png");
         background.setPosition(new Vector2(0,0));

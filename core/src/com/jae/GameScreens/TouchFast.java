@@ -18,11 +18,7 @@ import com.jae.Models.Entity;
 public class TouchFast extends JAEScreen {
     Entity background;
 
-    Camera camera;
-    SpriteBatch batch;
-
     Entity playButton;
-
 
     public TouchFast(Game game) {
         super(game);
@@ -44,14 +40,8 @@ public class TouchFast extends JAEScreen {
 
     @Override
     public void draw(float delta) {
-
-        Gdx.gl.glClearColor(0, 0.25f, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
         background.draw(batch);
         playButton.draw(batch);
-
-        batch.end();
     }
 
     @Override
@@ -61,9 +51,6 @@ public class TouchFast extends JAEScreen {
 
     private void init() {
         done = false;
-        batch = new SpriteBatch();
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0.0f);
 
         background = new Entity("airadventurelevel2.png");
         background.setPosition(new Vector2(0,0));
@@ -74,7 +61,10 @@ public class TouchFast extends JAEScreen {
         playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
 
         Gdx.app.debug("DontBuyMe","init Touch fast game");
+    }
 
-
+    @Override
+    public void dispose() {
+        super.dispose();
     }
 }

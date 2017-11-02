@@ -16,7 +16,6 @@ import com.jae.Models.Entity;
  */
 
 public class EndMenu extends JAEScreen { Camera camera;
-    SpriteBatch batch;
 
     Entity background;
 
@@ -31,7 +30,6 @@ public class EndMenu extends JAEScreen { Camera camera;
     @Override
     public void update(float delta) {
 
-        camera.update();
         if (Gdx.input.isTouched()) {
             Vector3 touchpos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0.0f));
             if (playButton.contains(touchpos.x, touchpos.y)) {
@@ -45,16 +43,10 @@ public class EndMenu extends JAEScreen { Camera camera;
 
     @Override
     public void draw(float delta) {
-
-        Gdx.gl.glClearColor(0, 0.25f, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
         background.draw(batch);
 
         playButton.draw(batch);
         endButton.draw(batch);
-
-        batch.end();
     }
 
     @Override
@@ -65,16 +57,11 @@ public class EndMenu extends JAEScreen { Camera camera;
     @Override
     public void dispose() {
         super.dispose();
-        batch.dispose();
         background.dispose();
-
     }
 
     private void init() {
         done = false;
-        batch = new SpriteBatch();
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0.0f);
 
         background = new Entity("parallax-forest.png");
         background.setPosition(new Vector2(0,0));

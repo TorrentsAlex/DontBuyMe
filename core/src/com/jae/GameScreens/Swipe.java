@@ -26,16 +26,13 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
     }
 
     Entity background;
-    Entity playButton;
 
     Entity imgUp;
     Entity imgDown;
     Entity imgLeft;
     Entity imgRight;
 
-    Camera camera;
-    SpriteBatch batch;
-
+    // Variables of the game
     ArrayList<SWIPE> swipesList;
     int currentCountSwipeList;
     SWIPE currentSWIPEDetected;
@@ -47,15 +44,6 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
 
     @Override
     public void update(float delta) {
-        camera.update();
-
-        if (Gdx.input.isTouched()) {
-            Vector3 touchpos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0.0f));
-            if (playButton.contains(touchpos.x, touchpos.y)) {
-                done = true;
-            }
-        }
-
         // Check if we swiped
         if (currentSWIPEDetected != SWIPE.NULL &&
                  swipesList.get(currentCountSwipeList).equals(currentSWIPEDetected)) {
@@ -70,13 +58,7 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
 
     @Override
     public void draw(float delta) {
-        Gdx.gl.glClearColor(0, 0.25f, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
-
         background.draw(batch);
-        playButton.draw(batch);
 
         // Render the swipes images
         SWIPE drawSWIPE = done ? SWIPE.NULL : swipesList.get(currentCountSwipeList);
@@ -96,8 +78,6 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
             case NULL:
                 break;
         }
-
-        batch.end();
     }
 
     @Override
@@ -108,7 +88,6 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
     @Override
     public void dispose() {
         super.dispose();
-        batch.dispose();
         background.dispose();
     }
 
@@ -130,21 +109,12 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
 
     private void init() {
         done = false;
-        batch = new SpriteBatch();
 
         shuffleSwipes();
-
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0.0f);
 
         background = new Entity("airadventurelevel4.png");
         background.setPosition(new Vector2(0,0));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        playButton = new Entity("b_round_g.png");
-        playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
-        playButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2 - playButton.getSize().x /2, Gdx.graphics.getHeight()/2));
-
 
         // Swipe images
         imgUp = new Entity("swipe_up.png");

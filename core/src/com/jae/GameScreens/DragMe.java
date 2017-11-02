@@ -21,9 +21,6 @@ public class DragMe extends JAEScreen {
     Entity background;
     Entity playButton;
 
-    Camera camera;
-    SpriteBatch batch;
-
     JAEAnimation flame;
 
     public DragMe(Game game) {
@@ -31,10 +28,8 @@ public class DragMe extends JAEScreen {
         init();
     }
 
-
     @Override
     public void update(float delta) {
-        camera.update();
         flame.update();
 
         if (Gdx.input.isTouched()) {
@@ -50,14 +45,9 @@ public class DragMe extends JAEScreen {
 
     @Override
     public void draw(float delta) {
-        Gdx.gl.glClearColor(0, 0.25f, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
         background.draw(batch);
         playButton.draw(batch);
         flame.draw(batch);
-        batch.end();
     }
 
     @Override
@@ -67,9 +57,6 @@ public class DragMe extends JAEScreen {
 
     private void init() {
         done = false;
-        batch = new SpriteBatch();
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0.0f);
 
         background = new Entity("airadventurelevel1.png");
         background.setPosition(new Vector2(0,0));
