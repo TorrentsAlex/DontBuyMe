@@ -57,15 +57,15 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
         }
 
         // Check if we swiped
-        if (currentSWIPEDetected != SWIPE.NULL) {
-            if (currentSWIPEDetected == swipesList.get(currentCountSwipeList)) {
-                if (currentCountSwipeList > swipesList.size()) {
-                    done = true;
-                }
-                currentCountSwipeList++;
+        if (currentSWIPEDetected != SWIPE.NULL &&
+                 swipesList.get(currentCountSwipeList).equals(currentSWIPEDetected)) {
+            currentCountSwipeList++;
+            if (currentCountSwipeList >= swipesList.size()) {
+                done = true;
             }
-            currentSWIPEDetected = SWIPE.NULL;
         }
+        currentSWIPEDetected = SWIPE.NULL;
+
     }
 
     @Override
@@ -79,7 +79,8 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
         playButton.draw(batch);
 
         // Render the swipes images
-        switch(swipesList.get(currentCountSwipeList)) {
+        SWIPE drawSWIPE = done ? SWIPE.NULL : swipesList.get(currentCountSwipeList);
+        switch(drawSWIPE) {
             case UP:
                 imgUp.draw(batch);
                 break;
@@ -172,34 +173,18 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
     private void onLeft() {currentSWIPEDetected  = SWIPE.LEFT;}
 
     // Gesture Listener overrides
-
-    @Override
-    public boolean touchDown(float x, float y, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean tap(float x, float y, int count, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean longPress(float x, float y) {
-        return false;
-    }
-
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-        if(Math.abs(velocityX)>Math.abs(velocityY)){
+        if(Math.abs(velocityX) > Math.abs(velocityY)){
             if(velocityX>0){
-               onRight();
-            }else{
+                onRight();
+            } else{
                 onLeft();
             }
         }else{
             if(velocityY>0){
                 onDown();
-            }else{
+            } else{
                 onUp();
             }
         }
@@ -207,27 +192,26 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
     }
 
     @Override
-    public boolean pan(float x, float y, float deltaX, float deltaY) {
-        return false;
-    }
+    public boolean touchDown(float x, float y, int pointer, int button) {return false;}
 
     @Override
-    public boolean panStop(float x, float y, int pointer, int button) {
-        return false;
-    }
+    public boolean tap(float x, float y, int count, int button) {return false;}
 
     @Override
-    public boolean zoom(float initialDistance, float distance) {
-        return false;
-    }
+    public boolean longPress(float x, float y) {return false;}
 
     @Override
-    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-        return false;
-    }
+    public boolean pan(float x, float y, float deltaX, float deltaY) {return false;}
 
     @Override
-    public void pinchStop() {
+    public boolean panStop(float x, float y, int pointer, int button) {return false;}
 
-    }
+    @Override
+    public boolean zoom(float initialDistance, float distance) {return false;}
+
+    @Override
+    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {return false;}
+
+    @Override
+    public void pinchStop() {}
 }
