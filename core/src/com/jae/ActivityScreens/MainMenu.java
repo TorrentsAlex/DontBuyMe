@@ -2,15 +2,12 @@ package com.jae.ActivityScreens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.jae.JAEScreen;
+import com.badlogic.gdx.utils.Timer;
+import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
 
 /**
@@ -23,6 +20,7 @@ public class MainMenu extends JAEScreen {
     Entity playButton;
     Entity title;
 
+    boolean taskerFinished;
 
     public MainMenu(Game game) {
         super(game);
@@ -37,14 +35,23 @@ public class MainMenu extends JAEScreen {
                 done = true;
             }
         }
+
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                // Do your work
+                taskerFinished = true;
+            }
+        }, 2.0f);
     }
 
     @Override
     public void draw(float delta) {
-
         background.draw(batch);
         playButton.draw(batch);
-        title.draw(batch);
+
+        if (taskerFinished)
+            title.draw(batch);
     }
 
     @Override
@@ -60,6 +67,8 @@ public class MainMenu extends JAEScreen {
 
     private void init() {
         done = false;
+
+        taskerFinished = false;
 
         background = new Entity("parallax-forest.png");
         background.setPosition(new Vector2(0,0));
@@ -79,3 +88,4 @@ public class MainMenu extends JAEScreen {
         Gdx.app.debug("DontBuyMe","init Main menu");
     }
 }
+
