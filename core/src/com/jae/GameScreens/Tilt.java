@@ -2,14 +2,10 @@ package com.jae.GameScreens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.jae.JAEScreen;
+import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
 import com.jae.Models.JAEAnimation;
 

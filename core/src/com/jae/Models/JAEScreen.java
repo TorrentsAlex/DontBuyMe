@@ -1,4 +1,4 @@
-package com.jae;
+package com.jae.Models;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;

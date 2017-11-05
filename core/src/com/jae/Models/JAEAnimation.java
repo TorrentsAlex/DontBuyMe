@@ -37,7 +37,6 @@ public class JAEAnimation extends Entity {
         stateTime = 0.0f;
     }
 
-
     @Override
     public void draw(SpriteBatch batch) {
         batch.draw(currentFrame,
