@@ -5,4 +5,6 @@ package com.jae.Utils;
  */
 
 public interface GameLogic {
+    void finishGame();
+    void startGame();
 }
