@@ -15,7 +15,7 @@ import java.awt.Image;
  * Created by Alex Torrents (AKA Turri) on 22-Oct-17.
  */
 
-public class EndMenu extends JAEScreen { Camera camera;
+public class EndMenu extends JAEScreen {
 
     Entity background;
 

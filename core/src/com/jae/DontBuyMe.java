@@ -93,6 +93,6 @@ public class DontBuyMe extends Game {
         games.add(new TouchFast(this));
         games.add(new Swipe(this));
 
-        Collections.shuffle(games);
+        //Collections.shuffle(games);
     }
 }
