@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
 import com.jae.Models.JAEAnimation;
+import com.jae.Utils.ImagePaths;
 
 /**
  * Created by Alex Torrents (AKA Turri) on 22-Oct-17.
@@ -36,7 +37,6 @@ public class DragMe extends JAEScreen {
             Vector2 flSize = flame.getSize();
             flame.setPosition(new Vector2(touchpos.x - flSize.x/2, touchpos.y - flSize.y/2));
         }
-
     }
 
     @Override
@@ -54,11 +54,11 @@ public class DragMe extends JAEScreen {
     private void init() {
         done = false;
 
-        background = new Entity("airadventurelevel1.png");
+        background = new Entity(ImagePaths.DRAGME_BACKGROUND);
         background.setPosition(new Vector2(0,0));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        playButton = new Entity("b_round_g.png");
+        playButton = new Entity(ImagePaths.DRAGME_BUTTON_NEXT);
         playButton.setPosition(new Vector2(0, 0));
         playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
 

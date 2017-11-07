@@ -7,6 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
+import com.jae.Utils.ImagePaths;
+
+import java.awt.Image;
 
 /**
  * Created by Alex Torrents (AKA Turri) on 22-Oct-17.
@@ -60,18 +63,18 @@ public class EndMenu extends JAEScreen { Camera camera;
     private void init() {
         done = false;
 
-        background = new Entity("parallax-forest.png");
+        background = new Entity(ImagePaths.END_BACKGROUND);
         background.setPosition(new Vector2(0,0));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        playButton = new Entity("returngame.png");
+        playButton = new Entity(ImagePaths.END_BUTTON_RETURN);
         playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
         playButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2 - playButton.getSize().x /2, Gdx.graphics.getHeight()/2));
 
-        endButton = new Entity("cross.png");
+        endButton = new Entity(ImagePaths.END_BUTTON_END);
         endButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
         endButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2 + playButton.getSize().x /2, Gdx.graphics.getHeight()/2));
-        Gdx.app.debug("DontBuyMe","init End menu");
 
+        Gdx.app.debug("DontBuyMe","init End menu");
     }
 }

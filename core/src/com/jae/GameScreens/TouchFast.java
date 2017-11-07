@@ -8,6 +8,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.jae.Models.GameScreen;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
+import com.jae.Utils.ImagePaths;
+
+import java.awt.Image;
 
 /**
  * Created by Alex Torrents (AKA Turri) on 22-Oct-17.
@@ -28,12 +31,8 @@ public class TouchFast extends GameScreen {
     public void update(float delta) {
         super.update(delta);
 
-
         if (Gdx.input.isTouched()) {
             Vector3 touchpos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0.0f));
-            if (playButton.contains(touchpos.x, touchpos.y)) {
-                done = true;
-            }
         }
     }
 
@@ -51,7 +50,7 @@ public class TouchFast extends GameScreen {
     private void init() {
         done = false;
 
-        backgroundGame = new Entity("airadventurelevel2.png");
+        backgroundGame = new Entity(ImagePaths.TOUCHFAST_BACKGROUND);
         backgroundGame.setPosition(new Vector2(0,0));
         backgroundGame.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 

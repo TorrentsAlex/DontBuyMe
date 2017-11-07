@@ -6,6 +6,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
+import com.jae.Utils.ImagePaths;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -108,24 +109,24 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
 
         shuffleSwipes();
 
-        background = new Entity("airadventurelevel4.png");
+        background = new Entity(ImagePaths.SWIPE_BACKGROUND);
         background.setPosition(new Vector2(0,0));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Swipe images
-        imgUp = new Entity("swipe_up.png");
+        imgUp = new Entity(ImagePaths.SWIPE_SWIPE_UP);
         imgUp.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgUp.setPositionCenter();
 
-        imgDown = new Entity("swipe_down.png");
+        imgDown = new Entity(ImagePaths.SWIPE_SWIPE_DOWN);
         imgDown.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgDown.setPositionCenter();
 
-        imgLeft = new Entity("swipe_left.png");
+        imgLeft = new Entity(ImagePaths.SWIPE_SWIPE_LEFT);
         imgLeft.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgLeft.setPositionCenter();
 
-        imgRight = new Entity("swipe_right.png");
+        imgRight = new Entity(ImagePaths.SWIPE_SWIPE_RIGHT);
         imgRight.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgRight.setPositionCenter();
 
