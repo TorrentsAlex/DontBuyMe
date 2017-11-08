@@ -39,6 +39,8 @@ public class ImagePaths {
 
 
     public static String TOUCHFAST_BACKGROUND = "airadventurelevel4.png";
+    public static String TOUCHFAST_WIN= "win_bk.png";
+    public static String TOUCHFAST_FAIL = "fail_bk.png";
 
     //public static String RUNOTTERRUN_BACKGROUND = "airadventurelevel4.png";
 

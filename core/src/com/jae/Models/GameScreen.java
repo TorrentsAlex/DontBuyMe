@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Timer;
  * Created by Alex Torrents (aka Turri) on 03-Nov-17.
  */
 
-public abstract class GameScreen extends JAEScreen {
+public class GameScreen extends JAEScreen {
     protected Entity backgroundGame;
     protected Entity backgroundWin;
     protected Entity backgroundFail;
@@ -27,6 +27,7 @@ public abstract class GameScreen extends JAEScreen {
     @Override
     public void update(float delta) {
         camera.update();
+
     }
 
     void finishGame() {}
@@ -62,16 +63,24 @@ public abstract class GameScreen extends JAEScreen {
     }
 
     public void startGame(float seconds) {
+//
+//        Timer.schedule(new Timer.Task() {
+//            @Override
+//            public void run() {
+//                gamestate = isWin ? GAMESTATE.WIN : GAMESTATE.FAIL;
+//            }
+//        }, seconds);
+
 
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                gamestate = isWin ? GAMESTATE.WIN : GAMESTATE.FAIL;
+                gamestate = GAMESTATE.WIN;
             }
-        }, seconds);
+        }, 2.0f);
     }
 
-    public abstract void drawGame(float delta);
-    public abstract void drawWin(float delta);
-    public abstract void drawFail(float delta);
+    public void drawGame(float delta) {}
+    public void drawWin(float delta) {}
+    public void drawFail(float delta) {}
 }

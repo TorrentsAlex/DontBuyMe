@@ -88,10 +88,10 @@ public class DontBuyMe extends Game {
 
         games.clear();
 
-        games.add(new Tilt(this));
-        games.add(new DragMe(this));
+        //games.add(new Tilt(this));
+        //games.add(new DragMe(this));
         games.add(new TouchFast(this));
-        games.add(new Swipe(this));
+        //games.add(new Swipe(this));
 
         //Collections.shuffle(games);
     }
