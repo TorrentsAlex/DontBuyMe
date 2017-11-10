@@ -2,11 +2,14 @@ package com.jae.GameScreens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
-import com.jae.Utils.ImagePaths;
+import com.jae.Utils.Data;
+import com.jae.Utils.GameCallback;
+import com.jae.Utils.GameLogic;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,23 +18,27 @@ import java.util.Collections;
  * Created by Alex Torrents (aka Turri) on 31-Oct-17.
  */
 
-public class Swipe extends JAEScreen implements GestureDetector.GestureListener {
+public class Swipe extends JAEScreen implements GestureDetector.GestureListener, GameCallback {
 
     enum SWIPE {
         UP, DOWN, LEFT, RIGHT, NULL
     }
 
-    Entity background;
+    private Entity backgroundGame;
+    private Entity backgroundWin;
+    private Entity backgroundFail;
 
-    Entity imgUp;
-    Entity imgDown;
-    Entity imgLeft;
-    Entity imgRight;
+    private Entity imgUp;
+    private Entity imgDown;
+    private Entity imgLeft;
+    private Entity imgRight;
 
+    private ArrayList<ParticleEffect> particlesToDraw;
     // Variables of the game
     ArrayList<SWIPE> swipesList;
     int currentCountSwipeList;
     SWIPE currentSWIPEDetected;
+    boolean allSwiped;
 
     public Swipe(Game game) {
         super(game);
@@ -40,24 +47,60 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
 
     @Override
     public void update(float delta) {
+        if (gameLoop != GameLoop.inGame)
+            return;
+
         // Check if we swiped
-        if (currentSWIPEDetected != SWIPE.NULL &&
-                 swipesList.get(currentCountSwipeList).equals(currentSWIPEDetected)) {
-            currentCountSwipeList++;
-            if (currentCountSwipeList >= swipesList.size()) {
-                done = true;
+        if (currentSWIPEDetected != SWIPE.NULL){
+            // Swiped the right direction
+            if (swipesList.get(currentCountSwipeList).equals(currentSWIPEDetected)) {
+                currentCountSwipeList++;
+
+                particlesToDraw.add(createParticle(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2 ));
+                if (currentCountSwipeList >= swipesList.size()) {
+                    allSwiped = true;
+                }
+            } else { // swiped the wrong direction
+                Gdx.input.vibrate(500);
             }
         }
         currentSWIPEDetected = SWIPE.NULL;
-
+        for (int i = 0; i< particlesToDraw.size(); i++) {
+            particlesToDraw.get(i).update(delta);
+        }
     }
 
     @Override
     public void draw(float delta) {
-        background.draw(batch);
+        switch (gameLoop) {
+            case inGame:
+            case wait:
+                drawGame();
+                break;
+            case win:
+                drawWin();
+                break;
+            case fail:
+                drawFail();
+                break;
+        }
+    }
+
+    @Override
+    public void show() {
+        Gdx.app.debug("DontBuyMe","Start Swipe");
+        GameLogic.startGameTimer(this, Data.GAMEDATA_TIME_START, Data.GAMEDATA_TIME_INGAME);
+    }
+
+    private void drawWin() {
+        backgroundWin.draw(batch);
+    }
+
+    private void drawGame() {
+        backgroundGame.draw(batch);
 
         // Render the swipes images
-        SWIPE drawSWIPE = done ? SWIPE.NULL : swipesList.get(currentCountSwipeList);
+        SWIPE drawSWIPE = allSwiped ? SWIPE.NULL : swipesList.get(currentCountSwipeList);
         switch(drawSWIPE) {
             case UP:
                 imgUp.draw(batch);
@@ -74,6 +117,36 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
             case NULL:
                 break;
         }
+
+        for (ParticleEffect pe : particlesToDraw) {
+            pe.draw(batch);
+        }
+    }
+
+    private void drawFail() {
+        backgroundFail.draw(batch);
+    }
+
+    @Override
+    public void startGame() {
+        gameLoop = GameLoop.inGame;
+    }
+
+    @Override
+    public void finishGame() {
+        Gdx.app.debug("DontBuyMe", "SWIPE, finish game");
+
+        // Check if the user finished the game
+        gameLoop = allSwiped ? GameLoop.win : GameLoop.fail;
+
+        GameLogic.nextGameTimer(this, Data.GAMEDATA_TIME_WINFAIL);
+    }
+
+    @Override
+    public void nextGame() {
+        Gdx.app.debug("DontBuyMe", "SWIPE next game, next Game");
+
+        done = true;
     }
 
     @Override
@@ -84,7 +157,7 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
     @Override
     public void dispose() {
         super.dispose();
-        background.dispose();
+        backgroundGame.dispose();
     }
 
     private void shuffleSwipes() {
@@ -106,53 +179,74 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener 
 
     private void init() {
         done = false;
+        allSwiped = false;
 
         shuffleSwipes();
 
-        background = new Entity(ImagePaths.SWIPE_BACKGROUND);
-        background.setPosition(new Vector2(0,0));
-        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        // Initialize all textures
+
+        backgroundGame = new Entity(Data.SWIPE_BACKGROUND_GAME);
+        backgroundGame.setPosition(new Vector2(0,0));
+        backgroundGame.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        backgroundWin = new Entity(Data.SWIPE_BACKGROUND_WIN);
+        backgroundWin.setPosition(new Vector2(0,0));
+        backgroundWin.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        backgroundFail = new Entity(Data.SWIPE_BACKGROUND_FAIL);
+        backgroundFail.setPosition(new Vector2(0,0));
+        backgroundFail.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Swipe images
-        imgUp = new Entity(ImagePaths.SWIPE_SWIPE_UP);
+        imgUp = new Entity(Data.SWIPE_SWIPE_UP);
         imgUp.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgUp.setPositionCenter();
 
-        imgDown = new Entity(ImagePaths.SWIPE_SWIPE_DOWN);
+        imgDown = new Entity(Data.SWIPE_SWIPE_DOWN);
         imgDown.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgDown.setPositionCenter();
 
-        imgLeft = new Entity(ImagePaths.SWIPE_SWIPE_LEFT);
+        imgLeft = new Entity(Data.SWIPE_SWIPE_LEFT);
         imgLeft.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgLeft.setPositionCenter();
 
-        imgRight = new Entity(ImagePaths.SWIPE_SWIPE_RIGHT);
+        imgRight = new Entity(Data.SWIPE_SWIPE_RIGHT);
         imgRight.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgRight.setPositionCenter();
+
+        particlesToDraw = new ArrayList<ParticleEffect>();
+
+        // Initialize GameLoop
+        gameLoop = GameLoop.wait;
 
         Gdx.input.setInputProcessor(new GestureDetector(this));
         Gdx.app.debug("DontBuyMe", "init Swipe Class");
     }
 
-    private void onUp() {currentSWIPEDetected  = SWIPE.UP;}
-    private void onDown() {currentSWIPEDetected  = SWIPE.DOWN;}
-    private void onRight() {currentSWIPEDetected  = SWIPE.RIGHT;}
-    private void onLeft() {currentSWIPEDetected  = SWIPE.LEFT;}
+    /** */
+    private ParticleEffect createParticle(float x, float y) {
+
+        ParticleEffect pe = new ParticleEffect();
+        pe.load(Gdx.files.internal(Data.SWIPE_PARTICLE_EFFECT), Gdx.files.internal(""));
+        pe.start();
+        pe.setPosition(x, y);
+        return pe;
+    }
 
     // Gesture Listener overrides
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
         if(Math.abs(velocityX) > Math.abs(velocityY)){
             if(velocityX>0){
-                onRight();
+                currentSWIPEDetected  = SWIPE.RIGHT;
             } else{
-                onLeft();
+                currentSWIPEDetected  = SWIPE.LEFT;
             }
-        }else{
+        } else {
             if(velocityY>0){
-                onDown();
+                currentSWIPEDetected  = SWIPE.DOWN;
             } else{
-                onUp();
+                currentSWIPEDetected  = SWIPE.UP;
             }
         }
         return false;
