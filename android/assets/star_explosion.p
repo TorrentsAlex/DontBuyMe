@@ -85,7 +85,16 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Angle - 
-active: false
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 360.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Rotation - 
 active: true
 lowMin: 1.0
@@ -94,7 +103,7 @@ highMin: 180.0
 highMax: 180.0
 relative: true
 scalingCount: 2
-scaling0: 1.0
+scaling0: 0.0
 scaling1: 1.0
 timelineCount: 2
 timeline0: 0.0
@@ -102,16 +111,7 @@ timeline1: 1.0
 - Wind - 
 active: false
 - Gravity - 
-active: true
-lowMin: 0.0
-lowMax: 0.0
-highMin: 0.0
-highMax: 0.0
-relative: false
-scalingCount: 1
-scaling0: 1.0
-timelineCount: 1
-timeline0: 0.0
+active: false
 - Tint - 
 colorsCount: 3
 colors0: 1.0
@@ -234,7 +234,16 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Angle - 
-active: false
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 360.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Rotation - 
 active: true
 lowMin: 1.0
@@ -383,7 +392,16 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Angle - 
-active: false
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 360.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Rotation - 
 active: true
 lowMin: 1.0
@@ -413,7 +431,7 @@ timeline0: 0.0
 - Tint - 
 colorsCount: 3
 colors0: 1.0
-colors1: 0.9843137
+colors1: 0.98039216
 colors2: 0.047058824
 timelineCount: 1
 timeline0: 0.0

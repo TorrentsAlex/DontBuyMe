@@ -2,24 +2,21 @@ package com.jae.GameScreens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.jae.Models.JAEScreen;
+import com.badlogic.gdx.utils.Timer;
 import com.jae.Models.Entity;
-import com.jae.Utils.ImagePaths;
-
-import java.util.Timer;
+import com.jae.Models.JAEScreen;
+import com.jae.Utils.Data;
+import com.jae.Utils.GameCallback;
 
 /**
  * Created by Alex Torrents (AKA Turri) on 22-Oct-17.
  */
 
-public class TouchFast extends JAEScreen {
+public class TouchFast extends JAEScreen implements GameCallback {
 
     private Entity backgroundGame;
-
-    private ParticleEffect startExplosion;
 
     public TouchFast(Game game) {
         super(game);
@@ -46,7 +43,7 @@ public class TouchFast extends JAEScreen {
 
     private void init() {
         done = false;
-        com.badlogic.gdx.utils.Timer.schedule(new com.badlogic.gdx.utils.Timer.Task(){
+        Timer.schedule(new com.badlogic.gdx.utils.Timer.Task(){
             @Override
             public void run() {
                 // Do your work
@@ -54,7 +51,7 @@ public class TouchFast extends JAEScreen {
             }
         }, 3.0f);
 
-        backgroundGame = new Entity(ImagePaths.TOUCHFAST_BACKGROUND);
+        backgroundGame = new Entity(Data.TOUCHFAST_BACKGROUND);
         backgroundGame.setPosition(new Vector2(0,0));
         backgroundGame.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -64,5 +61,25 @@ public class TouchFast extends JAEScreen {
     @Override
     public void dispose() {
         super.dispose();
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void startGame() {
+
+    }
+
+    @Override
+    public void finishGame() {
+
+    }
+
+    @Override
+    public void nextGame() {
+        done = true;
     }
 }

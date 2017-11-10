@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
-import com.jae.Utils.ImagePaths;
+import com.jae.Utils.Data;
 
 /**
  * Created by Alex Torrents (AKA Turri) on 22-Oct-17.
@@ -36,14 +36,11 @@ public class MainMenu extends JAEScreen {
                 done = true;
             }
         }
+    }
 
-        Timer.schedule(new Timer.Task(){
-            @Override
-            public void run() {
-                // Do your work
-                taskerFinished = true;
-            }
-        }, 2.0f);
+    @Override
+    public void show() {
+
     }
 
     @Override
@@ -71,15 +68,15 @@ public class MainMenu extends JAEScreen {
 
         taskerFinished = false;
 
-        background = new Entity(ImagePaths.MAINMENU_BACKGROUND);
+        background = new Entity(Data.MAINMENU_BACKGROUND);
         background.setPosition(new Vector2(0,0));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        playButton = new Entity(ImagePaths.MAINMENU_BUTTON_PLAY);
+        playButton = new Entity(Data.MAINMENU_BUTTON_PLAY);
         playButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/4));
         playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
 
-        Texture titleTexture = new Texture(ImagePaths.MAINMENU_TITLE);
+        Texture titleTexture = new Texture(Data.MAINMENU_TITLE);
         TextureRegion titleRegion = new TextureRegion(titleTexture, 0, 0, titleTexture.getWidth(), titleTexture.getHeight()/ 6);
 
         title = new Entity(titleRegion.getTexture());

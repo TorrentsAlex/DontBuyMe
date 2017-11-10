@@ -53,7 +53,6 @@ public class DontBuyMe extends Game {
                 case MENU:
                     gameState = GameState.GAME;
                     setScreen(games.get(countCurrentScreen));
-
                     break;
                 case GAME:
                     countCurrentScreen++;

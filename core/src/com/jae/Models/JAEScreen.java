@@ -7,13 +7,20 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.jae.Utils.Data;
 
 /**
  * Created by Alex Torrents AKA Turri on 22-Oct-17.
  */
 
 public abstract class JAEScreen implements Screen {
-
+    protected enum GameLoop {
+        wait,
+        inGame,
+        win,
+        fail
+    }
+    protected GameLoop gameLoop;
     protected Game game;
     protected boolean done;
 
@@ -26,6 +33,7 @@ public abstract class JAEScreen implements Screen {
     /** Called when a screen should render itself */
     public abstract void draw (float delta);
 
+    /** Call this when the game start*/
     public abstract boolean isDone();
 
     public JAEScreen(Game game) {
@@ -38,7 +46,7 @@ public abstract class JAEScreen implements Screen {
 
     @Override
     public void show() {
-
+        Gdx.app.debug(Data.TAG, "JAEScreen Show()");
     }
 
     @Override
