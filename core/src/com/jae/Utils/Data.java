@@ -4,8 +4,16 @@ package com.jae.Utils;
  * Created by Alex Torrents (aka Turri) on 07-Nov-17.
  */
 
-public class ImagePaths {
+public class Data {
 
+    // APPDATA
+    public static String TAG = "DOontBuyMe";
+
+    // GAMEDATA
+
+    public static float GAMEDATA_TIME_START = 2.0f;
+    public static float GAMEDATA_TIME_INGAME = 10.0f;
+    public static float GAMEDATA_TIME_WINFAIL = 5.0f;
     // SCREENS
 
     // MAINMENU
@@ -19,19 +27,20 @@ public class ImagePaths {
     public static String END_BUTTON_END = "cross.png";
 
 
-
     // GAMES
     public static String DRAGME_BACKGROUND = "airadventurelevel1.png";
     public static String DRAGME_BUTTON_NEXT = "b_round_g.png";
 
 
 
-    public static String SWIPE_BACKGROUND = "airadventurelevel2.png";
+    public static String SWIPE_BACKGROUND_GAME = "airadventurelevel2.png";
+    public static String SWIPE_BACKGROUND_WIN = "win_bk.png";
+    public static String SWIPE_BACKGROUND_FAIL = "fail_bk.png";
     public static String SWIPE_SWIPE_UP = "swipe_up.png";
     public static String SWIPE_SWIPE_DOWN = "swipe_down.png";
     public static String SWIPE_SWIPE_LEFT = "swipe_left.png";
     public static String SWIPE_SWIPE_RIGHT = "swipe_right.png";
-
+    public static String SWIPE_PARTICLE_EFFECT = "star_explosion.p";
 
     public static String TILT_BACKGROUND = "airadventurelevel3.png";
     public static String TILT_PLAYER = "jump-blue.png";
