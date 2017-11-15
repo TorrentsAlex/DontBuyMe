@@ -4,11 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.jae.Models.Entity;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.ParallaxBackground;
 import com.jae.Models.Otter.OtterRunner;
 import com.jae.Utils.Constants;
 import com.jae.Utils.GameCallback;
+import com.jae.Utils.GameLogic;
+
 
 /**
  * Created by Alex Torrents (AKA Turri) on 22-Oct-17.
@@ -19,6 +22,8 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
     private ParallaxBackground backgroundGame;
     private OtterRunner otterRunner;
 
+    // Tutorial
+    private Entity textTap;
 
     public Runner2D(Game game) {
         super(game);
@@ -34,7 +39,18 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
     @Override
     public void draw(float delta) {
         backgroundGame.draw(batch);
-        otterRunner.draw(batch);
+        switch (gameLoop) {
+            case tutorial:
+                textTap.draw(batch);
+                break;
+            case inGame:
+                otterRunner.draw(batch);
+                break;
+            case win:
+                break;
+            case fail:
+                break;
+        }
     }
 
     @Override
@@ -44,7 +60,7 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
 
     @Override
     public void show() {
-
+        GameLogic.startGameTimer(this, 1.0f, 10.0f);
     }
 
     @Override
@@ -57,22 +73,27 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
 
         backgroundGame = new ParallaxBackground(Constants.OTTER_BACKGROUND);
 
-        Gdx.app.debug("DontBuyMe","init Touch fast game");
+        Gdx.app.debug(Constants.TAG,"init Touch fast game");
 
-        // Add listener this class to touch
-        Gdx.input.setInputProcessor(new GestureDetector(this));
         otterRunner = new OtterRunner( new Vector2(Gdx.graphics.getWidth()*1/4,
                                                     Gdx.graphics.getHeight()*1/6),
                                         new Vector2(Gdx.graphics.getHeight()/4,
                                                     Gdx.graphics.getHeight()/4));
 
+        textTap = new Entity(Constants.OTTER_TEXT_TUTORIAL);
+        textTap.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        textTap.setPositionCenter();
+
+        gameLoop = GameLoop.tutorial;
     }
 
     //  GameCallbacks callbacks
 
     @Override
     public void startGame() {
-
+        gameLoop = GameLoop.inGame;
+        // Add listener this class to touch
+        Gdx.input.setInputProcessor(new GestureDetector(this));
     }
 
     @Override

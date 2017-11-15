@@ -15,7 +15,7 @@ import com.jae.Utils.Constants;
 
 public abstract class JAEScreen implements Screen {
     protected enum GameLoop {
-        wait,
+        tutorial,
         inGame,
         win,
         fail

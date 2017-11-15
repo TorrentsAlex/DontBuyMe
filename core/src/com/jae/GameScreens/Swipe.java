@@ -74,7 +74,7 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener,
     public void draw(float delta) {
         switch (gameLoop) {
             case inGame:
-            case wait:
+            case tutorial:
                 drawGame();
                 break;
             case win:
@@ -217,7 +217,7 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener,
         particlesToDraw = new ArrayList<ParticleEffect>();
 
         // Initialize GameLoop
-        gameLoop = GameLoop.wait;
+        gameLoop = GameLoop.tutorial;
 
         Gdx.input.setInputProcessor(new GestureDetector(this));
         Gdx.app.debug("DontBuyMe", "init Swipe Class");
