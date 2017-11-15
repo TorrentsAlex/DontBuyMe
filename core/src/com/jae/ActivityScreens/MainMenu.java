@@ -2,6 +2,7 @@ package com.jae.ActivityScreens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
+import com.jae.Models.Text;
 import com.jae.Utils.Data;
 
 /**
@@ -20,8 +22,8 @@ public class MainMenu extends JAEScreen {
     Entity background;
     Entity playButton;
     Entity title;
+    Text textDontBuyMe;
 
-    boolean taskerFinished;
 
     public MainMenu(Game game) {
         super(game);
@@ -47,9 +49,8 @@ public class MainMenu extends JAEScreen {
     public void draw(float delta) {
         background.draw(batch);
         playButton.draw(batch);
+        textDontBuyMe.draw(batch, delta);
 
-        if (taskerFinished)
-            title.draw(batch);
     }
 
     @Override
@@ -66,8 +67,6 @@ public class MainMenu extends JAEScreen {
     private void init() {
         done = false;
 
-        taskerFinished = false;
-
         background = new Entity(Data.MAINMENU_BACKGROUND);
         background.setPosition(new Vector2(0,0));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -79,9 +78,8 @@ public class MainMenu extends JAEScreen {
         Texture titleTexture = new Texture(Data.MAINMENU_TITLE);
         TextureRegion titleRegion = new TextureRegion(titleTexture, 0, 0, titleTexture.getWidth(), titleTexture.getHeight()/ 6);
 
-        title = new Entity(titleRegion.getTexture());
-        title.setSize(Gdx.graphics.getWidth()*3/4, Gdx.graphics.getHeight() /4);
-        title.setPosition(new Vector2(Gdx.graphics.getWidth()/2 + title.getSize().x/2, 50));
+        textDontBuyMe = new Text("Don't Buy Me", new Vector2(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2));
+        textDontBuyMe.setColor(Color.GOLD);
 
         Gdx.app.debug("DontBuyMe","init Main menu");
     }
