@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.jae.Utils.Data;
+import com.jae.Utils.Constants;
 
 /**
  * Created by Alex Torrents AKA Turri on 22-Oct-17.
@@ -46,7 +46,7 @@ public abstract class JAEScreen implements Screen {
 
     @Override
     public void show() {
-        Gdx.app.debug(Data.TAG, "JAEScreen Show()");
+        Gdx.app.debug(Constants.TAG, "JAEScreen Show()");
     }
 
     @Override
@@ -55,7 +55,7 @@ public abstract class JAEScreen implements Screen {
 
         update(delta);
 
-        Gdx.gl.glClearColor(0, 0.25f, 0, 1);
+        Gdx.gl.glClearColor(0, 0.f, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();

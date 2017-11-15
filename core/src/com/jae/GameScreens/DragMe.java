@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
 import com.jae.Models.JAEAnimation;
-import com.jae.Utils.Data;
+import com.jae.Utils.Constants;
 
 /**
  * Created by Alex Torrents (AKA Turri) on 22-Oct-17.
@@ -59,11 +59,11 @@ public class DragMe extends JAEScreen {
     private void init() {
         done = false;
 
-        background = new Entity(Data.DRAGME_BACKGROUND);
+        background = new Entity(Constants.DRAGME_BACKGROUND);
         background.setPosition(new Vector2(0,0));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        playButton = new Entity(Data.DRAGME_BUTTON_NEXT);
+        playButton = new Entity(Constants.DRAGME_BUTTON_NEXT);
         playButton.setPosition(new Vector2(0, 0));
         playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
 

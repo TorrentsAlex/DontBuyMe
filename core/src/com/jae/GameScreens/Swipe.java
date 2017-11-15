@@ -7,7 +7,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.jae.Models.JAEScreen;
 import com.jae.Models.Entity;
-import com.jae.Utils.Data;
+import com.jae.Utils.Constants;
 import com.jae.Utils.GameCallback;
 import com.jae.Utils.GameLogic;
 
@@ -89,7 +89,7 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener,
     @Override
     public void show() {
         Gdx.app.debug("DontBuyMe","Start Swipe");
-        GameLogic.startGameTimer(this, Data.GAMEDATA_TIME_START, Data.GAMEDATA_TIME_INGAME);
+        GameLogic.startGameTimer(this, Constants.GAMEDATA_TIME_START, Constants.GAMEDATA_TIME_INGAME);
     }
 
     private void drawWin() {
@@ -139,7 +139,7 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener,
         // Check if the user finished the game
         gameLoop = allSwiped ? GameLoop.win : GameLoop.fail;
 
-        GameLogic.nextGameTimer(this, Data.GAMEDATA_TIME_WINFAIL);
+        GameLogic.nextGameTimer(this, Constants.GAMEDATA_TIME_WINFAIL);
     }
 
     @Override
@@ -185,32 +185,32 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener,
 
         // Initialize all textures
 
-        backgroundGame = new Entity(Data.SWIPE_BACKGROUND_GAME);
+        backgroundGame = new Entity(Constants.SWIPE_BACKGROUND_GAME);
         backgroundGame.setPosition(new Vector2(0,0));
         backgroundGame.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        backgroundWin = new Entity(Data.SWIPE_BACKGROUND_WIN);
+        backgroundWin = new Entity(Constants.SWIPE_BACKGROUND_WIN);
         backgroundWin.setPosition(new Vector2(0,0));
         backgroundWin.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        backgroundFail = new Entity(Data.SWIPE_BACKGROUND_FAIL);
+        backgroundFail = new Entity(Constants.SWIPE_BACKGROUND_FAIL);
         backgroundFail.setPosition(new Vector2(0,0));
         backgroundFail.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Swipe images
-        imgUp = new Entity(Data.SWIPE_SWIPE_UP);
+        imgUp = new Entity(Constants.SWIPE_SWIPE_UP);
         imgUp.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgUp.setPositionCenter();
 
-        imgDown = new Entity(Data.SWIPE_SWIPE_DOWN);
+        imgDown = new Entity(Constants.SWIPE_SWIPE_DOWN);
         imgDown.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgDown.setPositionCenter();
 
-        imgLeft = new Entity(Data.SWIPE_SWIPE_LEFT);
+        imgLeft = new Entity(Constants.SWIPE_SWIPE_LEFT);
         imgLeft.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgLeft.setPositionCenter();
 
-        imgRight = new Entity(Data.SWIPE_SWIPE_RIGHT);
+        imgRight = new Entity(Constants.SWIPE_SWIPE_RIGHT);
         imgRight.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getWidth()/2);
         imgRight.setPositionCenter();
 
@@ -227,7 +227,7 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener,
     private ParticleEffect createParticle(float x, float y) {
 
         ParticleEffect pe = new ParticleEffect();
-        pe.load(Gdx.files.internal(Data.SWIPE_PARTICLE_EFFECT), Gdx.files.internal(""));
+        pe.load(Gdx.files.internal(Constants.SWIPE_PARTICLE_EFFECT), Gdx.files.internal(""));
         pe.start();
         pe.setPosition(x, y);
         return pe;
