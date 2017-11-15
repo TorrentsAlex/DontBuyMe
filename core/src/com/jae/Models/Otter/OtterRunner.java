@@ -33,7 +33,7 @@ public class OtterRunner {
     private boolean isJumping;
 
     public OtterRunner(Vector2 position, Vector2 size) {
-        TextureAtlas textureAtlas = new TextureAtlas("otter_anim.txt");
+        TextureAtlas textureAtlas = new TextureAtlas(Constants.OTTER_ANIMATION);
 
         TextureRegion[] runningFrames = new TextureRegion[runnPath.length];
         for (int i = 0; i < runnPath.length; i++) {
