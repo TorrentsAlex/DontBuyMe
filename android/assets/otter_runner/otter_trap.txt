@@ -1,0 +1,19 @@
+otter_trap.png
+size: 478, 503
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+trap_close
+  rotate: false
+  xy: 1, 209
+  size: 315, 293
+  orig: 315, 293
+  offset: 0, 0
+  index: -1
+trap_open
+  rotate: false
+  xy: 1, 1
+  size: 476, 206
+  orig: 476, 206
+  offset: 0, 0
+  index: -1
