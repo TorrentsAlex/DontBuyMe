@@ -51,13 +51,12 @@ public class Constants {
     public static final String OTTER_BACKGROUND = "otter_runner/airadventurelevel4.png";
     public static final String OTTER_ANIMATION ="otter_runner/otter_anim.txt";
     public static final String OTTER_TEXT_TUTORIAL ="otter_runner/otter_tutorial.png";
-    public static final float OTTER_GRAVITY = -10f;
-    public static final float OTTER_GROUND_Y = Gdx.graphics.getHeight()*1/4;
-    public static float OTTER_BACKGROUND_SPEED = 500.0f;
-
-
-    // SCREENS
-
-    //public static String RUNOTTERRUN_BACKGROUND = "airadventurelevel4.png";
-
+    public static final String OTTER_TRAP_ATLAS = "otter_runner/otter_trap.txt";
+    public static final String OTTER_TRAP_OPEN = "trap_open";
+    public static final String OTTER_TRAP_CLOSE = "trap_close";
+    
+    public static final float OTTER_GRAVITY = -2.5f;
+    public static final float OTTER_FORCE_JUMP = 50f;
+    public static final float OTTER_GROUND_Y = Gdx.graphics.getHeight()*1/8;
+    public static float OTTER_SPEED = 950.0f;
 }

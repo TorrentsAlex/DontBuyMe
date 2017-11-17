@@ -40,17 +40,17 @@ public class ParallaxBackground {
     }
 
     private boolean leftBoundsReached(float delta) {
-        return (textureRegionBounds2.x - (delta * Constants.OTTER_BACKGROUND_SPEED)) <= 0;
+        return (textureRegionBounds2.x - (delta * Constants.OTTER_SPEED)) <= -4.0f;
     }
 
     private void updateXBounds(float delta) {
-        textureRegionBounds1.x += delta * Constants.OTTER_BACKGROUND_SPEED;
-        textureRegionBounds2.x += delta * Constants.OTTER_BACKGROUND_SPEED;
+        textureRegionBounds1.x += delta * Constants.OTTER_SPEED;
+        textureRegionBounds2.x += delta * Constants.OTTER_SPEED;
     }
 
     private void resetBounds() {
         textureRegionBounds1 = textureRegionBounds2;
-        textureRegionBounds2 = new Rectangle(Gdx.graphics.getWidth(), 0, Gdx.graphics.getWidth(),
+        textureRegionBounds2 = new Rectangle(Gdx.graphics.getWidth()-4.0f, 0, Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight());
     }
 

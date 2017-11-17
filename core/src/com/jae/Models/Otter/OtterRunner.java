@@ -28,7 +28,6 @@ public class OtterRunner {
     private Vector2 initPosition;
 
     // Jump variables
-    private float forceJump = 100f;
     private float velocityJump;
     private boolean isJumping;
 
@@ -49,7 +48,7 @@ public class OtterRunner {
         rectangle.setPosition(position);
         initPosition = position;
         isJumping = false;
-        velocityJump = forceJump;
+        velocityJump = Constants.OTTER_FORCE_JUMP;
     }
 
     public Vector2 getPosition() {
@@ -97,7 +96,7 @@ public class OtterRunner {
         isJumping = false;
         rectangle.y = initPosition.y;
         stateTime = 0.0f;
-        velocityJump = forceJump;
+        velocityJump = Constants.OTTER_FORCE_JUMP;
     }
 
     public void startJump() {
