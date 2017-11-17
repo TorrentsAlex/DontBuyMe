@@ -48,7 +48,7 @@ public class MainMenu extends JAEScreen {
     public void draw(float delta) {
         background.draw(batch);
         playButton.draw(batch);
-        textDontBuyMe.draw(batch, delta);
+        //textDontBuyMe.draw(batch, delta);
 
     }
 
@@ -71,8 +71,9 @@ public class MainMenu extends JAEScreen {
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         playButton = new Entity(Constants.MAINMENU_BUTTON_PLAY);
-        playButton.setPosition(new Vector2(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/4));
-        playButton.setSize(new Vector2( Gdx.graphics.getHeight()/5, Gdx.graphics.getHeight()/5));
+        playButton.setSize(new Vector2( Gdx.graphics.getHeight()/2,
+                                        Gdx.graphics.getHeight()/2));
+        playButton.setPositionCenter();
 
         Texture titleTexture = new Texture(Constants.MAINMENU_TITLE);
         TextureRegion titleRegion = new TextureRegion(titleTexture, 0, 0, titleTexture.getWidth(), titleTexture.getHeight()/ 6);
