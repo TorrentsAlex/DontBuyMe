@@ -15,7 +15,7 @@ public class Constants {
     public static float GAMEDATA_TIME_START = 2.0f;
 
     public static float GAMEDATA_TIME_INGAME = 10.0f;
-    public static float GAMEDATA_TIME_WINFAIL = 5.0f;
+    public static float NEXT_GAME = 5.0f;
     // MAINMENU
     public static String MAINMENU_BACKGROUND = "parallax-forest.png";
 
@@ -54,9 +54,10 @@ public class Constants {
     public static final String OTTER_TRAP_ATLAS = "otter_runner/otter_trap.txt";
     public static final String OTTER_TRAP_OPEN = "trap_open";
     public static final String OTTER_TRAP_CLOSE = "trap_close";
-    
+    public static final float OTTER_GAME_TIME = 60.0f;
+    public static final int OTTER_TRAPS = (int) (0.75f * OTTER_GAME_TIME);
     public static final float OTTER_GRAVITY = -2.5f;
     public static final float OTTER_FORCE_JUMP = 50f;
     public static final float OTTER_GROUND_Y = Gdx.graphics.getHeight()*1/8;
-    public static float OTTER_SPEED = 950.0f;
+    public static float OTTER_GAME_SPEED = 900.0f;
 }

@@ -32,7 +32,7 @@ public class OtterTrap {
     }
 
     public void update(float delta) {
-        rectangle.x += Constants.OTTER_SPEED * -delta;
+        rectangle.x += Constants.OTTER_GAME_SPEED * -delta;
     }
 
     public void draw(SpriteBatch batch) {
@@ -45,6 +45,7 @@ public class OtterTrap {
                     rectangle.width,
                     rectangle.height);
         }
+
     }
 
     public void closeTrap() {

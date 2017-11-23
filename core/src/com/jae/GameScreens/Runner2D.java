@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.jae.Models.Entity;
 import com.jae.Models.JAEScreen;
@@ -24,10 +25,15 @@ import java.util.ArrayList;
 public class Runner2D extends JAEScreen implements GestureDetector.GestureListener, GameCallback {
 
     private ParallaxBackground backgroundGame;
+    private Entity backgroundWin;
+    private Entity backgroundFail;
+
     private OtterRunner otterRunner;
     private ArrayList<OtterTrap> traps;
     // Tutorial
     private Entity textTap;
+
+    private boolean isAlive;
 
     public Runner2D(Game game) {
         super(game);
@@ -47,6 +53,7 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
             traps.get(i).update(delta);
             if (Intersector.overlaps(otterRunner.getRectangle(), traps.get(i).getRectangle())) {
                 traps.get(i).closeTrap();
+                isAlive = false;
             }
         }
     }
@@ -65,8 +72,10 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
                 }
                 break;
             case win:
+                backgroundWin.draw(batch);
                 break;
             case fail:
+                backgroundFail.draw(batch);
                 break;
         }
     }
@@ -78,7 +87,7 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
 
     @Override
     public void show() {
-        GameLogic.startGameTimer(this, 1.0f, 10.0f);
+        GameLogic.startGameTimer(this, 1.0f, Constants.OTTER_GAME_TIME);
     }
 
     @Override
@@ -88,6 +97,13 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
 
     private void init() {
         done = false;
+        backgroundWin = new Entity(Constants.SWIPE_BACKGROUND_WIN);
+        backgroundWin.setPosition(new Vector2(0,0));
+        backgroundWin.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        backgroundFail = new Entity(Constants.SWIPE_BACKGROUND_FAIL);
+        backgroundFail.setPosition(new Vector2(0,0));
+        backgroundFail.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         backgroundGame = new ParallaxBackground(Constants.OTTER_BACKGROUND);
 
@@ -104,16 +120,17 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
 
         createTraps();
         gameLoop = GameLoop.tutorial;
+        isAlive = true;
     }
 
     private void createTraps() {
         traps = new ArrayList<OtterTrap>();
 
-        Vector2 trapSize = new Vector2(100, 100);
+        Vector2 trapSize = new Vector2(Gdx.graphics.getHeight()/8, Gdx.graphics.getHeight()/8);
         Vector2 pos = new Vector2(Gdx.graphics.getWidth(), Constants.OTTER_GROUND_Y);
-        for (int i=0; i < 4; i++) {
+        for (int i=0; i < Constants.OTTER_TRAPS; i++) {
             OtterTrap ot = new OtterTrap(pos, trapSize);
-            pos.x += i*10;
+            pos.x += 1000 + MathUtils.random(200, 500);
             traps.add(ot);
         }
     }
@@ -128,7 +145,9 @@ public class Runner2D extends JAEScreen implements GestureDetector.GestureListen
 
     @Override
     public void finishGame() {
+        gameLoop = isAlive ? GameLoop.win : GameLoop.fail;
 
+        GameLogic.nextGameTimer(this, Constants.NEXT_GAME);
     }
 
     @Override
