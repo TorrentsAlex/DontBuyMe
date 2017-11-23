@@ -88,6 +88,8 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener,
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(new GestureDetector(this));
+
         Gdx.app.debug("DontBuyMe","Start Swipe");
         GameLogic.startGameTimer(this, Constants.GAMEDATA_TIME_START, Constants.GAMEDATA_TIME_INGAME);
     }
@@ -139,7 +141,7 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener,
         // Check if the user finished the game
         gameLoop = allSwiped ? GameLoop.win : GameLoop.fail;
 
-        GameLogic.nextGameTimer(this, Constants.GAMEDATA_TIME_WINFAIL);
+        GameLogic.nextGameTimer(this, Constants.NEXT_GAME);
     }
 
     @Override
@@ -219,7 +221,6 @@ public class Swipe extends JAEScreen implements GestureDetector.GestureListener,
         // Initialize GameLoop
         gameLoop = GameLoop.tutorial;
 
-        Gdx.input.setInputProcessor(new GestureDetector(this));
         Gdx.app.debug("DontBuyMe", "init Swipe Class");
     }
 
