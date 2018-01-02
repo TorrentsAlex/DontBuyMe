@@ -1,0 +1,76 @@
+
+otter.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+jump0
+  rotate: false
+  xy: 0, 663
+  size: 285, 218
+  orig: 285, 218
+  offset: 0, 0
+  index: -1
+jump1
+  rotate: false
+  xy: 0, 225
+  size: 280, 220
+  orig: 280, 220
+  offset: 0, 0
+  index: -1
+jump2
+  rotate: false
+  xy: 0, 0
+  size: 274, 225
+  orig: 274, 225
+  offset: 0, 0
+  index: -1
+jump3
+  rotate: false
+  xy: 284, 243
+  size: 267, 230
+  orig: 267, 230
+  offset: 0, 0
+  index: -1
+jump4
+  rotate: false
+  xy: 280, 6
+  size: 258, 237
+  orig: 258, 237
+  offset: 0, 0
+  index: -1
+run0
+  rotate: false
+  xy: 0, 445
+  size: 284, 218
+  orig: 284, 218
+  offset: 0, 0
+  index: -1
+run1
+  rotate: false
+  xy: 285, 674
+  size: 289, 207
+  orig: 289, 207
+  offset: 0, 0
+  index: -1
+run2
+  rotate: false
+  xy: 285, 473
+  size: 292, 201
+  orig: 292, 201
+  offset: 0, 0
+  index: -1
+run3
+  rotate: false
+  xy: 577, 474
+  size: 292, 200
+  orig: 292, 200
+  offset: 0, 0
+  index: -1
+run4
+  rotate: false
+  xy: 574, 674
+  size: 289, 207
+  orig: 289, 207
+  offset: 0, 0
+  index: -1

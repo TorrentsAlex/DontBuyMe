@@ -8,9 +8,11 @@ import com.jae.ActivityScreens.EndMenu;
 import com.jae.ActivityScreens.MainMenu;
 import com.jae.GameScreens.Runner2D;
 import com.jae.GameScreens.Swipe;
+import com.jae.GameScreens.Tilt;
 import com.jae.Models.JAEScreen;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class DontBuyMe extends Game {
@@ -87,8 +89,8 @@ public class DontBuyMe extends Game {
         //games.add(new Tilt(this));
         //games.add(new DragMe(this));
         games.add(new Runner2D(this));
-        games.add(new Swipe(this));
+        //games.add(new Swipe(this));
 
-        //Collections.shuffle(games);
+        Collections.shuffle(games);
     }
 }

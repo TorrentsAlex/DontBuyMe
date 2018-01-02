@@ -17,11 +17,11 @@ public class OtterRunner {
 
     // Animation Variables
     private Animation animationRunning;
-    private TextureRegion animationJump;
+    private Animation animationJump;
     private float stateTime;
 
-    private String[] runnPath = {"frame-1", "frame-2", "frame-3", "frame-4", "frame-5", "frame-6"};
-    private String[] jumpPath = {"jump_fall", "jump_up"};
+    private String[] runnPath = {"run0", "run1", "run2", "run3", "run4"};
+    private String[] jumpPath = {"jump0", "jump1", "jump2", "jump3", "jump4"};
 
     // Positions, sizes
     private Rectangle rectangle;
@@ -38,9 +38,13 @@ public class OtterRunner {
         for (int i = 0; i < runnPath.length; i++) {
             runningFrames[i] = textureAtlas.findRegion(runnPath[i]);
         }
-        animationRunning = new Animation<TextureRegion>(0.2f, runningFrames);
+        animationRunning = new Animation<TextureRegion>(0.16f, runningFrames);
 
-        animationJump = textureAtlas.findRegion("jump_up");
+        TextureRegion[] jumpFrames = new TextureRegion[jumpPath.length];
+        for (int i = 0; i < jumpPath.length; i++) {
+            jumpFrames[i] = textureAtlas.findRegion(jumpPath[i]);
+        }
+        animationJump = new Animation<TextureRegion>(0.2f, jumpFrames);
         stateTime = 0.0f;
 
         rectangle = new Rectangle();
@@ -69,7 +73,7 @@ public class OtterRunner {
 
     public void draw(SpriteBatch batch) {
         if (isJumping) {
-            batch.draw(animationJump,
+            batch.draw((TextureRegion) animationJump.getKeyFrame(stateTime, false),
                     rectangle.x,
                     rectangle.y,
                     rectangle.width,
